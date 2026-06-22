@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bootstrap-flask
+  labels:
+    app: bootstrap-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bootstrap-flask
+  template:
+    metadata:
+      labels:
+        app: bootstrap-flask
+    spec:
+      containers:
+      - name: bootstrap-flask
+        image: bootstrap-flask:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 256Mi
+            cpu: 500m
