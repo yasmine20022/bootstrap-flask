@@ -12,10 +12,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Install dependencies
         run: |
           # Isolate installs in a venv so pip never hits PEP 668
@@ -72,6 +74,7 @@ jobs:
           python -c "import pytest" >/dev/null 2>&1 || python -m pip install pytest
       - name: Build Docker image
         run: docker build -t bootstrap-flask:latest .
+
       - name: Run tests
         if: env.HAS_TESTS == 'true'
         run: pytest
